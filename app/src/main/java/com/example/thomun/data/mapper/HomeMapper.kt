@@ -22,8 +22,11 @@ fun PaginationDto.toPagination(): Pagination = Pagination(
     total_pages = total_pages ?: 0
 )
 
-fun SectionDto.toSections(): Section = Section(
-    content = content.map { it.toContent() },
+fun SectionDto.toSection(): Section = Section(
+    content = requireNotNull(content) { "content cannot be null" }
+        .mapIndexed { _, contentDto ->
+            contentDto.toContent()
+        },
     content_type = content_type.orEmpty(),
     name = name.orEmpty(),
     order = order ?: 0,
