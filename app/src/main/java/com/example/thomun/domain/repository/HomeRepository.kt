@@ -1,7 +1,10 @@
 package com.example.thomun.domain.repository
 
+import androidx.paging.PagingData
 import com.example.thomun.domain.models.HomeSections
+import com.example.thomun.domain.models.Section
+import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-    suspend fun getHomeSections(): Result<HomeSections>
+    fun getPagedSections(): Flow<PagingData<Section>>
 }
