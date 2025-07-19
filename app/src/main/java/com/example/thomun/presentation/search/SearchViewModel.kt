@@ -26,7 +26,7 @@ class SearchViewModel @Inject constructor(
     private fun search(query: String) {
         _state.value = SearchState.Loading
         viewModelScope.launch {
-            getSearchResultsUseCase.invoke().onSuccess {
+            getSearchResultsUseCase.invoke(query).onSuccess {
                 _state.value = SearchState.Success(it)
             }.onFailure {
                 _state.value = SearchState.Error(it.message ?: "Unknown error")

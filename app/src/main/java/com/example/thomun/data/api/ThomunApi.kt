@@ -12,5 +12,7 @@ interface ThomunApi {
     ): HomeSectionsDto
 
     @GET("https://mock.apidog.com/m1/735111-711675-default/search")
-    suspend fun search(): HomeSectionsDto
+    suspend fun search(
+        @Query("q") query: String
+    ): HomeSectionsDto
 }

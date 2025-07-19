@@ -10,9 +10,9 @@ import okio.IOException
 class SearchRepositoryImpl(
     private val api: ThomunApi
 ): SearchRepository {
-    override suspend fun getSearchResults(): Result<HomeSections> {
+    override suspend fun getSearchResults(query: String): Result<HomeSections> {
         return try {
-            Result.success(api.search().toHomeSections())
+            Result.success(api.search(query).toHomeSections())
         } catch (e: HttpException) {
             Result.failure(e)
         } catch (e: IOException) {
