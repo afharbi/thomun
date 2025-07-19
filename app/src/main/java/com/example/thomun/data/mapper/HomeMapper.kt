@@ -1,26 +1,10 @@
 package com.example.thomun.data.mapper
 
-import com.example.thomun.data.models.ContentDto
-import com.example.thomun.data.models.HomeSectionsDto
-import com.example.thomun.data.models.PaginationDto
-import com.example.thomun.data.models.SectionDto
-import com.example.thomun.domain.models.Content
-import com.example.thomun.domain.models.HomeSections
-import com.example.thomun.domain.models.Pagination
-import com.example.thomun.domain.models.Section
+import com.example.thomun.data.models.home.ContentDto
+import com.example.thomun.data.models.home.SectionDto
+import com.example.thomun.domain.models.home.Content
+import com.example.thomun.domain.models.home.Section
 
-fun HomeSectionsDto.toHomeSections(): HomeSections = HomeSections(
-    pagination = pagination?.toPagination() ?: throw Exception("pagination cannot be null"),
-    sections = requireNotNull(sections) { "sections cannot be null" }
-        .mapIndexed { index, sectionDto ->
-            requireNotNull(sectionDto) { "section at index $index cannot be null" }.toSection()
-        }
-)
-
-fun PaginationDto.toPagination(): Pagination = Pagination(
-    next_page = next_page.orEmpty(),
-    total_pages = total_pages ?: 0
-)
 
 fun SectionDto.toSection(): Section = Section(
     content = requireNotNull(content) { "content cannot be null" }
@@ -32,6 +16,7 @@ fun SectionDto.toSection(): Section = Section(
     order = order ?: 0,
     type = type.orEmpty()
 )
+
 fun ContentDto.toContent(): Content = Content(
     article_id = article_id.orEmpty(),
     audio_url = audio_url.orEmpty(),

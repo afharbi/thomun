@@ -1,9 +1,9 @@
-package com.example.thomun.domain.models
+package com.example.thomun.domain.models.search
 
 data class Section(
     val content: List<Content>,
     val content_type: String,
     val name: String,
-    val order: Int,
+    val order: String,
     val type: String
 )

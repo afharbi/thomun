@@ -8,7 +8,7 @@ import androidx.paging.PagingState
 import coil.network.HttpException
 import com.example.thomun.data.api.ThomunApi
 import com.example.thomun.data.mapper.toSection
-import com.example.thomun.domain.models.Section
+import com.example.thomun.domain.models.home.Section
 import com.example.thomun.domain.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
 import okio.IOException

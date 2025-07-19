@@ -1,7 +1,7 @@
 package com.example.thomun.domain.repository
 
-import com.example.thomun.domain.models.HomeSections
+import com.example.thomun.domain.models.search.SearchSections
 
 interface SearchRepository {
-    suspend fun getSearchResults(query: String): Result<HomeSections>
+    suspend fun getSearchResults(query: String): Result<SearchSections>
 }

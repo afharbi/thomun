@@ -1,4 +1,4 @@
-package com.example.thomun.domain.models
+package com.example.thomun.domain.models.home
 
 data class Content(
     val article_id: String,

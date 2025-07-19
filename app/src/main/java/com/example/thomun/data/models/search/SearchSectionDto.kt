@@ -1,8 +1,8 @@
-package com.example.thomun.data.models
+package com.example.thomun.data.models.search
 
 import com.squareup.moshi.Json
 
-data class SectionDto(
+data class SearchSectionDto(
     @Json(name = "content")
     val content: List<ContentDto>?,
     @Json(name = "content_type")
@@ -10,7 +10,7 @@ data class SectionDto(
     @Json(name = "name")
     val name: String?,
     @Json(name = "order")
-    val order: Int?,
+    val order: String?,
     @Json(name = "type")
     val type: String?
 )

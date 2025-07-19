@@ -1,7 +1,7 @@
 package com.example.thomun.domain.usecase
 
 import androidx.paging.PagingData
-import com.example.thomun.domain.models.Section
+import com.example.thomun.domain.models.home.Section
 import com.example.thomun.domain.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

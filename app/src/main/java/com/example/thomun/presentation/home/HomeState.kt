@@ -1,6 +1,6 @@
 package com.example.thomun.presentation.home
 
-import com.example.thomun.domain.models.HomeSections
+import com.example.thomun.domain.models.home.HomeSections
 
 sealed class HomeState {
     data object Loading : HomeState()

@@ -1,4 +1,4 @@
-package com.example.thomun.data.models
+package com.example.thomun.data.models.home
 
 import com.squareup.moshi.Json
 
