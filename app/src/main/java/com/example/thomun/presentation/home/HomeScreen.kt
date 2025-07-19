@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,16 +21,16 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.thomun.R
 import com.example.thomun.domain.models.home.Section
 import com.example.thomun.presentation.common.MediaSection
 
@@ -37,9 +39,9 @@ import com.example.thomun.presentation.common.MediaSection
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    onSearchClick: () -> Unit
+    onSearchClick: () -> Unit,
+    onNotificationsClick: () -> Unit
 ) {
-    val state by viewModel.state.collectAsState()
     val pagedSections: LazyPagingItems<Section> = viewModel.pagedSections.collectAsLazyPagingItems()
 
     Column(
@@ -48,7 +50,14 @@ fun HomeScreen(
             .fillMaxSize()
     ) {
         TopAppBar(
-            title = { Text("Home") },
+            title = {
+                Icon(
+                    modifier = Modifier.size(55.dp),
+                    painter = painterResource(id = R.drawable.thmanyah_logo),
+                    tint = Color(0xFFE94E1B),
+                    contentDescription = "thmanyah logo",
+                )
+            },
             actions = {
                 Row(
                     modifier = modifier.clickable(
@@ -56,12 +65,19 @@ fun HomeScreen(
                         interactionSource = remember { MutableInteractionSource() },
                         onClick = { onSearchClick.invoke() })
                 ) {
-                    IconButton(onClick = onSearchClick) {
-                        Icon(
-                            Icons.Default.Search,
-                            contentDescription = "Search",
-                            tint = Color.White
-                        )
+                    IconButton(onClick = onNotificationsClick) {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .background(Color.White.copy(alpha = 0.08f), shape = CircleShape)
+                        ) {
+                            Icon(
+                                Icons.Default.Notifications,
+                                contentDescription = "Notifications",
+                                tint = Color.White,
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
                     }
                 }
             }
@@ -74,7 +90,6 @@ fun HomeScreen(
                         sections = listOf(
                             section.type to section.content
                         ),
-                        onSearchClick = onSearchClick,
                         onPlayClick = {}
                     )
                 }
