@@ -58,8 +58,6 @@ fun SplashScreen(
         delay(1700)
         onAnimationFinished()
     }
-
-    // Background gradient
     Box(
         modifier = modifier
             .background(
@@ -69,7 +67,6 @@ fun SplashScreen(
             ).fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Animated pulse/glow behind logo
         Box(
             modifier = Modifier
                 .size(180.dp)
@@ -94,7 +91,7 @@ fun SplashScreen(
             iterations = 1
         )
         Text(
-            text = "Thomun", // Replace with your app name
+            text = "Thomun",
             color = Color.White,
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold,

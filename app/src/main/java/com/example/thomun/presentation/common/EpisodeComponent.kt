@@ -31,6 +31,8 @@ import coil.compose.rememberAsyncImagePainter
 @Composable
 fun EpisodePreviewCard(
     modifier: Modifier = Modifier,
+    squareSize: Int,
+    playButtonOffset: Int = -8,
     imageUrl: String,
     title: String,
     author: String,
@@ -40,8 +42,8 @@ fun EpisodePreviewCard(
     Column {
         Box(
             modifier = modifier
-                .width(160.dp)
-                .height(180.dp)
+                .width(squareSize.dp)
+                .height(squareSize.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .padding(8.dp)
         ) {
@@ -51,7 +53,8 @@ fun EpisodePreviewCard(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(160.dp)
+                    .width(squareSize.dp)
+                    .height(squareSize.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .align(Alignment.TopCenter)
             )
@@ -61,7 +64,7 @@ fun EpisodePreviewCard(
                 modifier = Modifier
                     .size(36.dp)
                     .align(Alignment.BottomEnd)
-                    .offset(x = (-8).dp, y = (-8).dp)
+                    .offset(x = (-8).dp, y = (playButtonOffset).dp)
                     .padding(bottom = 15.dp)
                     .background(Color.Black, CircleShape)
             ) {
@@ -84,6 +87,7 @@ fun EpisodePreviewCard(
         // Title & Author
         Column(
             modifier = Modifier
+                .width(squareSize.dp)
                 .padding(bottom = 36.dp),
             //horizontalAlignment = Alignment.BottomStart
         ) {
