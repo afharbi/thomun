@@ -46,7 +46,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SearchBar(
     input: String = "",
-    hint: String = "Search for episode, article, or something else..",
+    hint: String = "Search for episode, articles",
     onValueChange: (String) -> Unit = {},
     onClear: () -> Unit = {}
 ) {
@@ -101,7 +101,7 @@ fun EditedTextWithIcon(
         singleLine = true,
         cursorBrush = SolidColor(Color(0xFFAEB8C5)),
         textStyle = TextStyle(
-            color = Color(0xFF697077),
+            color = Color(0xFFBDC1C6),
             fontSize = 12.sp,
             lineHeight = 16.sp
         ),
@@ -115,12 +115,12 @@ fun EditedTextWithIcon(
                     Icon(
                         imageVector = leadingIcon,
                         contentDescription = null,
-                        tint = Color(0x0FFFFFFF),
+                        tint = Color(0x6BFFFFFF),
                         modifier = Modifier
                             .padding(start = 12.dp, end = 6.dp)
-                            .size(14.dp)
+                            .size(18.dp)
                     )
-                Box(Modifier.weight(1f)) {
+                Box(Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
                     Text(
                         text = if (inputValue.isEmpty() && !openKeyboard) hint else "",
                         fontSize = 14.sp,
