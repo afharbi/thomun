@@ -6,9 +6,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -18,6 +20,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -44,45 +47,48 @@ fun HomeScreen(
 ) {
     val pagedSections: LazyPagingItems<Section> = viewModel.pagedSections.collectAsLazyPagingItems()
 
-    Column(
-        modifier = Modifier
-            .background(Color(0xFF121212))
-            .fillMaxSize()
-    ) {
-        TopAppBar(
-            title = {
-                Icon(
-                    modifier = Modifier.size(55.dp),
-                    painter = painterResource(id = R.drawable.thmanyah_logo),
-                    tint = Color(0xFFE94E1B),
-                    contentDescription = "thmanyah logo",
-                )
-            },
-            actions = {
-                Row(
-                    modifier = modifier.clickable(
-                        indication = null,
-                        interactionSource = remember { MutableInteractionSource() },
-                        onClick = { onSearchClick.invoke() })
-                ) {
-                    IconButton(onClick = onNotificationsClick) {
-                        Box(
-                            modifier = Modifier
-                                .size(50.dp)
-                                .background(Color.White.copy(alpha = 0.08f), shape = CircleShape)
-                        ) {
-                            Icon(
-                                Icons.Default.Notifications,
-                                contentDescription = "Notifications",
-                                tint = Color.White,
-                                modifier = Modifier.align(Alignment.Center)
-                            )
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Icon(
+                        modifier = Modifier.size(55.dp),
+                        painter = painterResource(id = R.drawable.thmanyah_logo),
+                        tint = Color(0xFFE94E1B),
+                        contentDescription = "thmanyah logo",
+                    )
+                },
+                actions = {
+                    Row(
+                        modifier = modifier.clickable(
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() },
+                            onClick = { onSearchClick.invoke() })
+                    ) {
+                        IconButton(onClick = onNotificationsClick) {
+                            Box(
+                                modifier = Modifier
+                                    .size(50.dp)
+                                    .background(Color.White.copy(alpha = 0.08f), shape = CircleShape)
+                            ) {
+                                Icon(
+                                    Icons.Default.Notifications,
+                                    contentDescription = "Notifications",
+                                    tint = Color.White,
+                                    modifier = Modifier.align(Alignment.Center)
+                                )
+                            }
                         }
                     }
                 }
-            }
-        )
-        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            )
+        },
+        contentWindowInsets = WindowInsets(0,0,0,0),
+        containerColor = Color(0xFF121212)
+    ) { innerPadding ->
+        Box(modifier = modifier
+            .fillMaxSize()
+            .padding(innerPadding), contentAlignment = Alignment.Center) {
             LazyColumn(modifier = Modifier.padding(10.dp)) {
                 items(pagedSections.itemSnapshotList.items) { section ->
                     MediaSection(

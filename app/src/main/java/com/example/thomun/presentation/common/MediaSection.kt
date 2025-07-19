@@ -76,22 +76,6 @@ fun MediaSection(
                     )
                 }
             }
-            Horizontal2x2Grid(
-                items = episodes,
-                itemContent = { episode ->
-                    // Your card composable here
-                    EpisodePreviewCard(
-                        imageUrl = episode.avatar_url,
-                        title = episode.name,
-                        author = episode.podcast_name,
-                        duration = episode.duration.toDuration(DurationUnit.SECONDS)
-                            .toString(),
-                        onPlayClick = { onPlayClick() },
-                        squareSize = 140
-                    )
-                }
-            )
-
         }
     }
 }
