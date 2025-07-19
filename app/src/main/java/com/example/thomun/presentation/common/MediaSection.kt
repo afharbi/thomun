@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,9 +30,7 @@ import kotlin.time.toDuration
 fun MediaSection(
     section: String,
     sections: List<Pair<String, List<Content>>>,
-    onSearchClick: () -> Unit,
-    onPlayClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onPlayClick: () -> Unit
 ) {
     Column(modifier = Modifier.padding(10.dp)) {
         sections.forEachIndexed { idx, (sectionTitle, episodes) ->
@@ -46,6 +48,13 @@ fun MediaSection(
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp,
                 )
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = null,
+                        tint = Color.LightGray
+                    )
+                }
             }
             LazyRow(
                 contentPadding = PaddingValues(bottom = 8.dp),
@@ -58,10 +67,6 @@ fun MediaSection(
                             SectionType.BOOKS.type, SectionType.BIG_ITEM_HORIZONTAL_LIST.type -> 250
                             else -> 140
                         },
-                        playButtonOffset = when (sectionTitle) {
-                            SectionType.BOOKS.type, SectionType.BIG_ITEM_HORIZONTAL_LIST.type -> -38
-                            else -> -12
-                        },
                         imageUrl = episode.avatar_url,
                         title = episode.name,
                         author = episode.podcast_name,
@@ -71,6 +76,21 @@ fun MediaSection(
                     )
                 }
             }
+            Horizontal2x2Grid(
+                items = episodes,
+                itemContent = { episode ->
+                    // Your card composable here
+                    EpisodePreviewCard(
+                        imageUrl = episode.avatar_url,
+                        title = episode.name,
+                        author = episode.podcast_name,
+                        duration = episode.duration.toDuration(DurationUnit.SECONDS)
+                            .toString(),
+                        onPlayClick = { onPlayClick() },
+                        squareSize = 140
+                    )
+                }
+            )
 
         }
     }
