@@ -5,15 +5,16 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.EaseOutBack
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -24,16 +25,15 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.thomun.R
 import kotlinx.coroutines.delay
 
-@SuppressLint("RememberReturnType")
+@SuppressLint("RememberReturnType", "UseOfNonLambdaOffsetOverload")
 @Composable
 fun SplashScreen(
     onAnimationFinished: () -> Unit,
@@ -62,7 +62,7 @@ fun SplashScreen(
         modifier = modifier
             .background(
                 Brush.verticalGradient(
-                    listOf(Color(0xFF121212), Color(0xFF1DB954))
+                    listOf(Color(0x80000000), Color(0xFF000000))
                 )
             ).fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -77,28 +77,29 @@ fun SplashScreen(
                 }
                 .background(
                     brush = Brush.radialGradient(
-                        colors = listOf(Color(0xFF1DB954), Color.Transparent)
+                        colors = listOf(Color(0x80000000), Color.Transparent)
                     ),
                     shape = CircleShape
                 )
         )
         // Logo
-        LottieAnimation(
-            composition = composition,
-            modifier = Modifier
-                .width(100.dp)
-                .height(100.dp),
-            iterations = 1
-        )
-        Text(
-            text = "Thomun",
-            color = Color.White,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(top = 70.dp)
-                .offset(y = textOffsetY.value.dp)
-                .alpha(textAlpha.value)
-        )
+        Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            LottieAnimation(
+                composition = composition,
+                modifier = Modifier
+                    .width(100.dp)
+                    .height(100.dp),
+                iterations = 1
+            )
+            Icon(
+                modifier = Modifier
+                    .size(55.dp)
+                    .offset(y = textOffsetY.value.dp)
+                    .alpha(textAlpha.value),
+                painter = painterResource(id = R.drawable.thmanyah_logo),
+                tint = Color(0xFFE94E1B),
+                contentDescription = "thmanyah logo",
+            )
+        }
     }
 }
